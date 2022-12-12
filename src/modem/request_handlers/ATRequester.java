@@ -11,8 +11,11 @@ public abstract class ATRequester {
 
     protected abstract void setRequester();
 
-    public String makeRequest(ATCommandExecutor executor) {
+    public ATRequester() {
         setRequester();
+    }
+
+    public String makeRequest(ATCommandExecutor executor) {
         executor.openPort(115200, 8, 1, 0);
         String commandResult;
         try {
