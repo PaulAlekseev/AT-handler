@@ -1,15 +1,27 @@
 package modem.request_handlers;
 
+
+import modem.request_handlers.interfaces.ATParser;
 import modem.request_handlers.interfaces.ATRequest;
 
-public class ATRequester {
-    private ATCommandExecutor executor;
+public abstract class ATRequester {
 
-    public ATRequester(ATCommandExecutor executor) {
-        this.executor = executor;
+    protected ATRequest request;
+    protected ATParser parser;
+
+    protected abstract void setRequester();
+
+    public String makeRequest(ATCommandExecutor executor) {
+        setRequester();
+        executor.openPort(115200, 8, 1, 0);
+        String commandResult;
+        try {
+            commandResult = request.makeRequest(executor);
+        } catch (Exception exception) {
+            return null;
+        }
+        executor.closePort();
+        return parser.parse(commandResult);
     }
 
-    public String executeRequest(ATRequest request) throws Exception {
-        return request.makeRequest(executor);
-    }
 }
