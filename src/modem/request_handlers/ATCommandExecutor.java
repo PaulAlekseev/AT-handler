@@ -3,31 +3,21 @@ package modem.request_handlers;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-import java.beans.PropertyEditorSupport;
-
 public class ATCommandExecutor {
-    private SerialPort serialPort;
+    private final SerialPort serialPort;
 
-    private static ATCommandExecutor executor;
-
-    private ATCommandExecutor() {
-        serialPort = new SerialPort("COM1");
+    public ATCommandExecutor(String portName) {
+        serialPort = new SerialPort(portName);
     }
 
-    public void executeAtCommand(String command) throws Exception {
+    public void executeAtCommand(String command, int timeout) throws Exception {
         String finalCommand = command + "\r\n";
         serialPort.writeString(finalCommand);
-        // TO ENVIRONMENT VARIABLE
-        Thread.sleep(1000);
+        Thread.sleep(timeout);
     }
 
     public String readResult() throws SerialPortException {
         return serialPort.readString();
-    }
-
-    public ATCommandExecutor setPort(String port) {
-        serialPort = new SerialPort(port);
-        return this;
     }
 
     public boolean openPort(int baudRate, int dataBits, int stopBits, int parity) {
@@ -50,12 +40,5 @@ public class ATCommandExecutor {
             return false;
         }
         return true;
-    }
-
-    public static ATCommandExecutor getExecutor() {
-        if(executor == null) {
-            executor = new ATCommandExecutor();
-        }
-        return executor;
     }
 }
