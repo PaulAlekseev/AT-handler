@@ -5,8 +5,9 @@ import modem.request_handlers.interfaces.ATRequest;
 
 public class ATSignalQualityRequest implements ATRequest {
     @Override
-    public String makeRequest(ATCommandExecutor executor) throws Exception {
+    public String makeRequest(ATCommandExecutor executor, String operator) throws Exception {
         executor.executeAtCommand("AT+CSQ", 50);
         return executor.readResult();
     }
+
 }

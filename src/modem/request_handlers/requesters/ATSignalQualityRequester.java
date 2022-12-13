@@ -6,9 +6,14 @@ import modem.request_handlers.requests.ATSignalQualityRequest;
 
 public class ATSignalQualityRequester extends ATRequester {
 
+    public ATSignalQualityRequester(String operator) {
+        super(operator);
+    }
+
     @Override
     protected void setRequester() {
         request = new ATSignalQualityRequest();
         parser = new ATSignalQualityParser();
     }
+
 }

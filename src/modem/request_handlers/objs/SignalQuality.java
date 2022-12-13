@@ -6,9 +6,9 @@ import modem.request_handlers.requesters.ATSignalQualityRequester;
 public class SignalQuality {
     private String signalQuality;
 
-    public String getSignalQuality(ATCommandExecutor executor) {
+    public String getSignalQuality(ATCommandExecutor executor, String operator) {
         if(signalQuality == null) {
-            ATSignalQualityRequester requester = new ATSignalQualityRequester();
+            ATSignalQualityRequester requester = new ATSignalQualityRequester(operator);
             signalQuality = requester.makeRequest(executor);
         }
         return signalQuality;
