@@ -28,6 +28,9 @@ public abstract class ATRequester {
             return null;
         }
         executor.closePort();
+        if(commandResult == null) {
+            return null;
+        }
         return parser.parse(commandResult, operator);
     }
 

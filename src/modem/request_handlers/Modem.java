@@ -1,5 +1,6 @@
 package modem.request_handlers;
 
+import modem.request_handlers.objs.IMSI;
 import modem.request_handlers.objs.Messages;
 import modem.request_handlers.objs.PhoneNumber;
 import modem.request_handlers.objs.SignalQuality;
@@ -11,12 +12,15 @@ public class Modem {
     private final Messages messages;
     private final String operator;
 
-    public Modem(String portName, String operator) {
-        this.executor = new ATCommandExecutor(portName);
+    private final IMSI imsi;
+
+    public Modem(String portName, String modemModel, String operator) {
         this.operator = operator;
-        this.signalQuality = new SignalQuality();
-        this.phoneNumber = new PhoneNumber();
-        this.messages = new Messages();
+        executor = new ATCommandExecutor(portName);
+        signalQuality = new SignalQuality();
+        phoneNumber = new PhoneNumber();
+        messages = new Messages();
+        imsi = new IMSI();
     }
 
     public String getSignalQuality() {
@@ -33,5 +37,9 @@ public class Modem {
 
     public String getOperator() {
         return operator;
+    }
+
+    public String getIMSI() {
+        return imsi.getIMSI(executor, operator);
     }
 }

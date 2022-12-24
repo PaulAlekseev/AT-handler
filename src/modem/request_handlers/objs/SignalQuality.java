@@ -4,13 +4,13 @@ import modem.request_handlers.ATCommandExecutor;
 import modem.request_handlers.requesters.ATSignalQualityRequester;
 
 public class SignalQuality {
-    private String signalQuality;
+
+    private ATSignalQualityRequester requester;
 
     public String getSignalQuality(ATCommandExecutor executor, String operator) {
-        if(signalQuality == null) {
-            ATSignalQualityRequester requester = new ATSignalQualityRequester(operator);
-            signalQuality = requester.makeRequest(executor);
+        if(requester == null) {
+            requester = new ATSignalQualityRequester(operator);
         }
-        return signalQuality;
+        return requester.makeRequest(executor);
     }
 }
