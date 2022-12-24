@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ATMessagesParser implements ATParser {
     @Override
-    public String parse(String data, String operator) {
+    public String parse(String data) {
         String resultRegex = "\\+CMGL:\\s\\d+,\"REC\\sREAD\",\".*\",\"\",\".*\"\r\n(.*)\r\n";
         Pattern resultRegexPattern = Pattern.compile(resultRegex);
         Matcher matcher = resultRegexPattern.matcher(data);

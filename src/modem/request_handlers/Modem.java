@@ -10,12 +10,9 @@ public class Modem {
     private final PhoneNumber phoneNumber;
     private final ATCommandExecutor executor;
     private final Messages messages;
-    private final String operator;
-
     private final IMSI imsi;
 
-    public Modem(String portName, String modemModel, String operator) {
-        this.operator = operator;
+    public Modem(String portName, String modemModel) {
         executor = new ATCommandExecutor(portName);
         signalQuality = new SignalQuality();
         phoneNumber = new PhoneNumber();
@@ -24,22 +21,18 @@ public class Modem {
     }
 
     public String getSignalQuality() {
-        return signalQuality.getSignalQuality(executor, operator);
+        return signalQuality.getSignalQuality(executor);
     }
 
     public String getPhoneNumber() {
-        return phoneNumber.getPhoneNumber(executor, operator);
+        return phoneNumber.getPhoneNumber(executor);
     }
 
     public String getMessages() {
-        return messages.getMessages(executor, operator);
-    }
-
-    public String getOperator() {
-        return operator;
+        return messages.getMessages(executor);
     }
 
     public String getIMSI() {
-        return imsi.getIMSI(executor, operator);
+        return imsi.getIMSI(executor);
     }
 }

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class ATPhoneNumberParser implements ATParser {
 
     @Override
-    public String parse(String data, String operator) {
+    public String parse(String data) {
         String regex = OperatorNumberRegex.getRegex(operator);
         String resultRegex = "\\+CUSD:\\s2,\"([\\d\\w]+)\"";
         if(regex!=null) {

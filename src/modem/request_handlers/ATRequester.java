@@ -8,22 +8,20 @@ public abstract class ATRequester {
 
     protected ATRequest request;
     protected ATParser parser;
-    protected String operator;
 
     protected abstract void setRequester();
 
 
 
-    public ATRequester(String operator) {
+    public ATRequester() {
         setRequester();
-        this.operator = operator;
     }
 
     public String makeRequest(ATCommandExecutor executor) {
         executor.openPort(115200, 8, 1, 0);
         String commandResult;
         try {
-            commandResult = request.makeRequest(executor, operator);
+            commandResult = request.makeRequest(executor);
         } catch (Exception exception) {
             return null;
         }
@@ -31,7 +29,7 @@ public abstract class ATRequester {
         if(commandResult == null) {
             return null;
         }
-        return parser.parse(commandResult, operator);
+        return parser.parse(commandResult);
     }
 
 }

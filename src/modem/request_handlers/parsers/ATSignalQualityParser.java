@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class ATSignalQualityParser implements ATParser {
     @Override
-    public String parse(String data, String operator) {
+    public String parse(String data) {
         Pattern regex = Pattern.compile("\\+CSQ:\s(\\d+,\\d+)");
         if(data == null) return null;
         Matcher matcher = regex.matcher(data);
