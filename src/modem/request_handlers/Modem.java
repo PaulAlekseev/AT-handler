@@ -1,5 +1,7 @@
 package modem.request_handlers;
 
+import modem.request_handlers.containers.IMSIContainer;
+import modem.request_handlers.containers.PhoneNumberContainer;
 import modem.request_handlers.objs.IMSI;
 import modem.request_handlers.objs.Messages;
 import modem.request_handlers.objs.PhoneNumber;
@@ -12,7 +14,7 @@ public class Modem {
     private final Messages messages;
     private final IMSI imsi;
 
-    public Modem(String portName, String modemModel) {
+    public Modem(String portName) {
         executor = new ATCommandExecutor(portName);
         signalQuality = new SignalQuality();
         phoneNumber = new PhoneNumber();
@@ -24,7 +26,7 @@ public class Modem {
         return signalQuality.getSignalQuality(executor);
     }
 
-    public String getPhoneNumber() {
+    public PhoneNumberContainer getPhoneNumber() {
         return phoneNumber.getPhoneNumber(executor);
     }
 
@@ -32,7 +34,11 @@ public class Modem {
         return messages.getMessages(executor);
     }
 
-    public String getIMSI() {
+    public IMSIContainer getIMSI() {
         return imsi.getIMSI(executor);
+    }
+
+    public ATCommandExecutor getExecutor() {
+        return executor;
     }
 }

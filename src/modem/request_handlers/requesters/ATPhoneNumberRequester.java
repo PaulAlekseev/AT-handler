@@ -5,9 +5,6 @@ import modem.request_handlers.parsers.ATPhoneNumberParser;
 import modem.request_handlers.requests.ATPhoneNumberRequest;
 
 public class ATPhoneNumberRequester extends ATRequester {
-    public ATPhoneNumberRequester(String operator) {
-        super(operator);
-    }
 
     @Override
     protected void setRequester() {

@@ -1,6 +1,8 @@
 package modem.request_handlers.objs;
 
 import modem.request_handlers.ATCommandExecutor;
+import modem.request_handlers.containers.PhoneNumberContainer;
+import modem.request_handlers.parsers.PhoneNumberParser;
 import modem.request_handlers.requesters.ATPhoneNumberRequester;
 
 public class PhoneNumber {
@@ -8,13 +10,14 @@ public class PhoneNumber {
 
     private ATPhoneNumberRequester requester;
 
-    public String getPhoneNumber(ATCommandExecutor executor, String operator) {
+    public PhoneNumberContainer getPhoneNumber(ATCommandExecutor executor) {
         if(requester == null) {
-            requester = new ATPhoneNumberRequester(operator);
+            requester = new ATPhoneNumberRequester();
         }
         if(phoneNumber == null) {
             phoneNumber = requester.makeRequest(executor);
         }
-        return phoneNumber;
+
+        return PhoneNumberParser.parsePhoneNumber(phoneNumber, executor);
     }
 }

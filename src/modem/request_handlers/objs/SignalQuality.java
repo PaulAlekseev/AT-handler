@@ -7,9 +7,9 @@ public class SignalQuality {
 
     private ATSignalQualityRequester requester;
 
-    public String getSignalQuality(ATCommandExecutor executor, String operator) {
+    public String getSignalQuality(ATCommandExecutor executor) {
         if(requester == null) {
-            requester = new ATSignalQualityRequester(operator);
+            requester = new ATSignalQualityRequester();
         }
         return requester.makeRequest(executor);
     }

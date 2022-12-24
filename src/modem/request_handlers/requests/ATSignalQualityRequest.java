@@ -6,8 +6,11 @@ import modem.request_handlers.interfaces.ATRequest;
 public class ATSignalQualityRequest implements ATRequest {
     @Override
     public String makeRequest(ATCommandExecutor executor) throws Exception {
+        executor.openPort(115200, 8, 1, 0);
         executor.executeAtCommand("AT+CSQ", 50);
-        return executor.readResult();
+        String result = executor.readResult();
+        executor.closePort();
+        return result;
     }
 
 }

@@ -7,9 +7,9 @@ public class Messages {
 
     private ATMessagesRequester requester;
 
-    public String getMessages(ATCommandExecutor executor, String operator) {
+    public String getMessages(ATCommandExecutor executor) {
         if(requester == null) {
-            requester = new ATMessagesRequester(operator);
+            requester = new ATMessagesRequester();
         }
         return requester.makeRequest(executor);
     }

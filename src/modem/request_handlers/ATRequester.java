@@ -18,14 +18,12 @@ public abstract class ATRequester {
     }
 
     public String makeRequest(ATCommandExecutor executor) {
-        executor.openPort(115200, 8, 1, 0);
         String commandResult;
         try {
             commandResult = request.makeRequest(executor);
         } catch (Exception exception) {
             return null;
         }
-        executor.closePort();
         if(commandResult == null) {
             return null;
         }
