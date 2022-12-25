@@ -1,11 +1,15 @@
 package modem.request_handlers;
 
 import modem.request_handlers.containers.IMSIContainer;
+import modem.request_handlers.containers.MessageContainer;
 import modem.request_handlers.containers.PhoneNumberContainer;
+import modem.request_handlers.containers.SignalQualityContainer;
 import modem.request_handlers.objs.IMSI;
 import modem.request_handlers.objs.Messages;
 import modem.request_handlers.objs.PhoneNumber;
 import modem.request_handlers.objs.SignalQuality;
+
+import java.util.ArrayList;
 
 public class Modem {
     private final SignalQuality signalQuality;
@@ -22,7 +26,7 @@ public class Modem {
         imsi = new IMSI();
     }
 
-    public String getSignalQuality() {
+    public SignalQualityContainer getSignalQuality() {
         return signalQuality.getSignalQuality(executor);
     }
 
@@ -30,7 +34,7 @@ public class Modem {
         return phoneNumber.getPhoneNumber(executor);
     }
 
-    public String getMessages() {
+    public ArrayList<MessageContainer> getMessages() {
         return messages.getMessages(executor);
     }
 
