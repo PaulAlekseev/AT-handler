@@ -8,6 +8,7 @@ import modem.request_handlers.objs.IMSI;
 import modem.request_handlers.objs.Messages;
 import modem.request_handlers.objs.PhoneNumber;
 import modem.request_handlers.objs.SignalQuality;
+import modem.request_handlers.requesters.ATDeleteSMSRequester;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,10 @@ public class Modem {
     private final ATCommandExecutor executor;
     private final Messages messages;
     private final IMSI imsi;
+    private final String port;
 
     public Modem(String portName) {
+        port = portName;
         executor = new ATCommandExecutor(portName);
         signalQuality = new SignalQuality();
         phoneNumber = new PhoneNumber();
@@ -44,5 +47,14 @@ public class Modem {
 
     public ATCommandExecutor getExecutor() {
         return executor;
+    }
+
+    public Boolean deleteSMS() {
+        ATDeleteSMSRequester deleteSMSRequester = new ATDeleteSMSRequester();
+        return deleteSMSRequester.makeRequest(getExecutor()) != null;
+    }
+
+    public String getPort() {
+        return port;
     }
 }
